@@ -14,9 +14,7 @@ function header() {
 
   const imageStyle = useTransform(scrollYProgress, [0, 0.5, 1], [-800, 0, 1400]);
   return (
-    <div ref={targetRef} className="w-full h-screen">
-      <HeaderProducts imageStyle={imageStyle} />
-      <HeaderProducts imageStyle={imageStyle} />
+    <div className="w-full h-screen">
       <HeaderProducts imageStyle={imageStyle} />
     </div>
   );

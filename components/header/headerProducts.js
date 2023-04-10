@@ -21,7 +21,6 @@ function headerProducts({imageStyle}) {
       </div>
       <div className="w-5/6 h-2/6 rotate-12 flex justify-center items-start">
         <motion.img
-          style={{x: imageStyle}}
           transition={{ duration: 2 }}
           src="/assets/fish.png"
           className="5/6 md:w-3/6"
