@@ -1,9 +1,18 @@
-import ProductPage from "../../../components/productPage/productPage";
-import { useSelector } from "react-redux";
+import ProductPage from "./productPage";
+import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
+import { fetchProductsDetails } from "@/App/Features/productDetails/productDetailsSlice";
+import { useRouter } from "next/router";
 
 function product() {
-  const opened = useSelector((state) => state.basket.opened);
+  const dispatch = useDispatch();
+  const details = useSelector((state) => state.productDetails.details);
+  const router = useRouter();
+  const { index } = router.query;
+
+  useEffect(() => {
+    dispatch(fetchProductsDetails(index));
+  }, []);
 
   return (
     <>
@@ -15,11 +24,15 @@ function product() {
       <div className="w-full h-screen relative z-10 flex flex-col justify-center items-center">
         <div className="w-4/6 h-3/6 flex justify-between items-center">
           <div className="flex justify-center items-center w-3/6">
-            <img src="/assets/productImg.png" className="w-2/6" alt="" />
-            <div className="w-4/6 flex flex-col justify-center items-start pl-6 gap-y-5">
-              <h1 className="text-white text-5xl font-black">lou pescadou</h1>
-              <p className="text-white text-xl font-regular">
-                this is a description justo to make it long enough
+            <img
+              src={details.strDrinkThumb}
+              className="absolute rounded-[10px] w-full right-0 -z-10 md:relative -top-44 md:top-auto md:w-2/6"
+              alt=""
+            />
+            <div className="md:w-4/6 w-full flex flex-col justify-center items-start pl-6 gap-y-5">
+              <h1 className="text-white text-xl md:text-5xl font-black">{details.strDrink}</h1>
+              <p className="text-white text-sm md:text-xl font-regular">
+                {details.strInstructions}
               </p>
             </div>
           </div>

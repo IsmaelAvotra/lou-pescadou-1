@@ -1,19 +1,25 @@
 import "../styles/globals.css";
 import { Providers } from "@/App/provider";
-import { AnimatePresence } from "framer-motion";
 import Nevbar from "../../components/nevbar";
 import Basket from "../../components/basket/basket";
+import Menu from "../../components/menu";
+import SearchPanel from "../../components/searchPanel";
+import ProductDetails from "../../components/productDetails/productDetails";
 
 export default function App({ Component, pageProps }) {
   return (
     <Providers>
-      <AnimatePresence >
-        <div className="hidden md:flex">
-          <Nevbar />
-        </div>
-        <Basket />
-        <Component {...pageProps} />
-      </AnimatePresence>
+      <div className="hidden lg:flex">
+        <Nevbar />
+      </div>
+
+      <div className="flex lg:hidden w-full fixed z-50 bottom-2 justify-center">
+        <Menu />
+      </div>
+      <SearchPanel />
+      <ProductDetails />
+      <Basket />
+      <Component {...pageProps} />
     </Providers>
   );
 }
