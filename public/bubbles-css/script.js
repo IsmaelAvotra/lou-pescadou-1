@@ -15,7 +15,7 @@ function createBubble() {
 
   //  animate the element
   const frames = [
-    { transform: "translate(-100%, -100%)" },
+    { transform: `translate(-${params.x}%, 100%)` },
     { transform: `translate(-${params.x}%,-${params.y}%)` },
   ];
 
