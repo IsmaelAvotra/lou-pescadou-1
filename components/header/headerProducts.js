@@ -9,10 +9,6 @@ function headerProducts({imageStyle}) {
     {id:4, name:'Fish 4', image:'fish-3.png', price:31},
   ];
   const [animatedFish, setAnimatedFish] = useState(heroProducts[0]);
-  
-  // useEffect(() => {
-  //   console.log(imageStyle);
-  // }, [imageStyle]);
 
 
   const changeAnimatedFish=()=>{
@@ -23,7 +19,19 @@ function headerProducts({imageStyle}) {
       setAnimatedFish(heroProducts[0]);
     }
   }
-  setInterval(changeAnimatedFish, 10000)
+
+  useEffect(() => {
+    const intervalId = setInterval(changeAnimatedFish, 10000);
+    return () => clearInterval(intervalId);
+  }, [animatedFish]);
+
+  const { scrollY } = useScroll()
+  const sx = useTransform(
+    scrollY,
+    [0, 100],
+    [0, 10],
+    { clamp: false }
+  )
 
   const fishAnimation={
     x:[-2000, -60, -60, -60, 2000],
@@ -59,7 +67,7 @@ function headerProducts({imageStyle}) {
 
   
   return (
-    <div className="w-full h-full flex justify-center items-center flex-col relative  overflow-hidden">
+    <div className="w-full h-full flex justify-center items-center flex-col relative  overflow-hidden" onWheel={(e)=>e.preventDefault()}>
       <div className="w-5/6 h-3/6 flex justify-start items-center">
         <motion.h1
           initial={{ x: -200 }}
