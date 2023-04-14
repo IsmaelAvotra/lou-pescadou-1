@@ -1,10 +1,10 @@
 import Header from "../../components/header/header";
 import MostSold from "../../components/producsSection/ProducsSection";
+import PopularProducts from "../../components/producsSection/popularProducts";
 import Canvas from "../../components/bublles/canvas";
 import { fetchProductsData } from "@/App/Features/Products/produtsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import Categories from "../../components/categories/categories";
 
 export default function Home() {
   return (
@@ -21,10 +21,7 @@ export default function Home() {
 
       <div className="w-full relative h-screen z-10">
         <Header />
-        <div className="flex py-16 justify-center items-center">
-          <Categories />
-        </div>
-
+        <PopularProducts/>
         <MostSold title="Most sold this week" />
         <MostSold title="Most popular" />
       </div>

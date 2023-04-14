@@ -1,121 +1,103 @@
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
+import Categories from "../../components/categories/categories";
+
 
 function headerProducts({imageStyle}) {
   const heroProducts=[
-    {id:1, name:'Fish 1', image:'fish.png', price:10},
-    {id:2, name:'Fish 2', image:'fish-1.png', price:126},
-    {id:3, name:'Fish 3', image:'fish-2.png', price:31},
-    {id:4, name:'Fish 4', image:'fish-3.png', price:31},
+    {id:1, name:'Archerfish', image:'fish.png', price:10, x:'50', y:'-400', angle:0},
+    {id:2, name:'Salmon', image:'fish-1.png', price:126, x:'50', y:'500', angle:180},
+    {id:3, name:'Tuna', image:'fish-2.png', price:31, x:'500', y:'50', angle:90},
+    {id:4, name:'Angelfish', image:'fish-3.png', price:31, x:'-400', y:'50', angle:270},
   ];
-  const [animatedFish, setAnimatedFish] = useState(heroProducts[0]);
+  const [rotate, setRotate] = useState(0);
+  const [scrollAnabled, setScrollAnabled] = useState(false);
 
 
-  const changeAnimatedFish=()=>{
-    if(animatedFish.image!=heroProducts[heroProducts.length - 1].image){
-      let index= heroProducts.findIndex(p => p.image==animatedFish.image);
-      setAnimatedFish(heroProducts[index + 1]);
-    }else{
-      setAnimatedFish(heroProducts[0]);
-    }
-  }
+  const disableScroll = () => {   
+    document.body.style.overflow = "hidden";
+    document.documentElement.style.overflow = "hidden";
+    document.documentElement.scrollTop = 0;
+    document.documentElement.scrollLeft = 0;
+  };
+
+  const enableScroll = () => {
+    document.body.style.overflow = 'initial';
+    document.documentElement.style.overflow = 'initial';
+  };
 
   useEffect(() => {
-    const intervalId = setInterval(changeAnimatedFish, 10000);
-    return () => clearInterval(intervalId);
-  }, [animatedFish]);
+    window.addEventListener('wheel', ()=>{
+      const delta = Math.sign(event.deltaY);
+      if (delta > 0) {
+        setRotate(rotate + 10); // down
+      } else if (delta < 0) {
+        setRotate(rotate - 10); // up
+      }
+    })
 
-  const { scrollY } = useScroll()
-  const sx = useTransform(
-    scrollY,
-    [0, 100],
-    [0, 10],
-    { clamp: false }
-  )
+    if(!scrollAnabled){
+      disableScroll()
+    }
 
-  const fishAnimation={
-    x:[-2000, -60, -60, -60, 2000],
-    y:[500, -100, -100, -100, -300],
-    display:'block',
-    rotate:[0, -13, -15, -13, 10],
-    transition:{
-      duration:10,
-      repeat:1,
-    },
-  }
+    if(rotate % 260==0 && rotate!=0){
+      enableScroll()
+      setScrollAnabled(true)
+    }
 
-  const priceAnimation={
-    x:[2000, 200, 200, 200, -2000],
-    y:[100,  100, 100],
-    display:'flex',
-    transition:{
-      duration:10,
-      repeat:1,
-    },
-  }
+    document.addEventListener('keyup', (e)=>{
+      console.log(e.key);
+      if(e.key=='ArrowDown'){
+        const wheelEvent = new WheelEvent('wheel', {deltaY: 100});
+        window.dispatchEvent(wheelEvent);
+      }
 
-  const textAnimation={
-    x:[-2000, -250, -250, -250, 2000],
-    y:[-200,  -200, -200],
-    display:'flex',
-    transition:{
-      duration:10,
-      repeat:1,
-    },
-  }
-  
+      if(e.key=='ArrowUp'){
+        const wheelEvent = new WheelEvent('wheel', {deltaY: -100});
+        window.dispatchEvent(wheelEvent);
+      }
+    })
 
-  
+    // if(window.scrollY==0 && scrollAnabled){
+    //   disableScroll()
+    //   setScrollAnabled(false)
+    // }
+  }, [rotate]);
+
   return (
-    <div className="w-full h-full flex justify-center items-center flex-col relative  overflow-hidden" onWheel={(e)=>e.preventDefault()}>
-      <div className="w-5/6 h-3/6 flex justify-start items-center">
-        <motion.h1
-          initial={{ x: -200 }}
-          animate={{ x: 0 }}
-          exit={{ x: 800 }}
-          className="text-white opacity-50 text-8xl font-black"
-        >
-          lou pescadou
-        </motion.h1>
-      </div>
-      <div className="w-5/6 h-2/6 flex justify-center items-start w-1/2">
-        <motion.div className="glassmorphism"></motion.div>
-        {heroProducts.map(product=>(
-            <>
-              <motion.h2
-                animate={product.image==animatedFish.image? textAnimation : {}}
-                style={{x:2000, y:500, display:'none'}}
-                className="fish-text"
-              >
-                {product.name}
-              </motion.h2>
+    <div className="w-full h-full flex justify-center items-center flex-col relative overflow-hidden">
+      <motion.div
+        className="w-5/6 h-2/6 flex justify-center items-start absolute fish-container"
+        style={{translateX:'-50%', rotate:rotate}}
+      >
+        {heroProducts.map((product, i)=>(
               <motion.img
+                key={product.id}
                 transition={{ duration: 2 }}
                 src={`/assets/${product.image}`}
-                className="5/6 md:w-3/6 absolute fish"
+                className="absolute"
                 alt=""
-                animate={product.image==animatedFish.image? fishAnimation : {}}
-                style={{x:2000, y:500, display:'none'}}
+                style={{top:`${product.y}%`, left:`${product.x}%`, transform:`translate(-50%, -50%) rotate(${product.angle}deg)`}}
               />
-              <motion.h3
-                animate={product.image==animatedFish.image? priceAnimation : {}}
-                style={{x:2000, y:500, display:'none'}}
-                className="fish-price"
-              >
-                {product.price}
-              </motion.h3>
-            </>
         ))}
-      </div>
-      <div className="w-5/6 h-1/6 flex justify-end items-start">
-        <motion.h2
-          initial={{ x: -200 }}
-          animate={{ x: 0 }}
-          exit={{ x: 800 }}
-          className="text-white opacity-50 text-7xl font-black"
-        >
-          30£
-        </motion.h2>
+      </motion.div>
+      <motion.div
+        className="w-5/6 h-2/6 flex justify-center items-start absolute fish-container fish-text-container"
+        style={{translateX:'-50%', rotate:-rotate}}
+      >
+        {heroProducts.map((product, i)=>(
+              <motion.h3
+                key={`text-${product.id}`}
+                className="absolute fish-text"
+                alt=""
+                style={{top:`${product.y}%`, left:`${product.x}%`, transform:`translate(-50%, -50%) rotate(${product.angle}deg)`}}
+              >
+                  {product.name}
+              </motion.h3>
+        ))}
+      </motion.div>
+      <div className="flex py-16 justify-center items-center absolute w-full bottom-10">
+          <Categories />
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/slide.css";
 import { Providers } from "@/App/provider";
 import Nevbar from "../../components/nevbar";
 import Basket from "../../components/basket/basket";
