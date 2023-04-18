@@ -5,7 +5,7 @@ import { openProductDetails } from "@/App/Features/productDetails/productDetails
 import { AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
 
-function productCard({ title, id, photoUrl, description }) {
+function productCard({ title, id, photoUrl, description, cardClasss }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const products = useSelector((state) => state.basket.Products);
@@ -41,16 +41,19 @@ function productCard({ title, id, photoUrl, description }) {
   };
 
   return (
-    <div className="flex flex-col md:h-[95%] h-5/6 w-5/6 md:w-full justify-center items-center bg-[#6281aca1] backdrop-blur-2xl shadow-2xl rounded-[20px]">
+    <motion.div 
+      className={`flex flex-col md:h-[95%] h-5/6 w-5/6 md:w-full justify-center items-center ${cardClasss} rounded-[20px] m-auto`}
+      whileHover={{y:10}}
+    >
       <div className="w-full h-[20%] md:h-[50%] flex flex-col justify-center items-center">
         <div className="w-full h-full flex justify-center items-center">
           <div className="w-3/6 text-white font-bold text-xl md:text-3xl flex justify-start px-5 items-start">
             <h1>30£</h1>
           </div>
-          <div className="w-3/6 flex justify-end items-cente px-5">
+          <div className=" flex justify-end items-cente px-5">
             <div
               onClick={(e) => handleBuy(e)}
-              className="w-12 h-12 md:w-20 md:h-20 flex border-white border-[1px] rounded-full justify-center items-center"
+              className="w-10 h-10 md:w-15 md:h-15 flex border-white border-[1px] rounded-full justify-center items-center"
             >
               {products.filter((product) => product.id === id).length > 0 ? (
                 <motion.div
@@ -66,14 +69,15 @@ function productCard({ title, id, photoUrl, description }) {
                   />
                 </motion.div>
               ) : (
-                <motion.img
+                <motion.div
                   initial={{ opacity: 0, rotateY: 500 }}
                   animate={{ opacity: 1, rotateY: 0 }}
                   ecit={{ opacity: 0, rotateY: 500 }}
                   transition={{ duration: 2 }}
-                  src="/assets/shoppingbag.png"
-                  alt=""
-                />
+                  style={{fontSize:20, color:"#fff", cursor:'pointer'}}
+                >
+                  <i className="fa-solid fa-bag-shopping"></i>
+                </motion.div>
               )}
             </div>
           </div>
@@ -83,18 +87,18 @@ function productCard({ title, id, photoUrl, description }) {
           <img src="/assets/fish.png" className="w-5/6" alt="" />
         </div>
         <div className="w-full px-5 flex justify-between items-center">
-          <div className="w-4/6 py-2 md:py-6 font-bold text-xl border-white border-[1px] flex justify-center items-center text-white rounded-full ">
+          <div className="w-4/6 py-2 md:py-3 font-bold text-xl border-white border-[1px] flex justify-center items-center text-white rounded-full ">
             <p>{title}</p>
           </div>
           <div
             onClick={(e) => handleProductPage(e)}
-            className="w-12 h-12 md:w-20 md:h-20 border-white border-[1px] flex justify-center items-center text-white rounded-full "
+            className="w-12 h-12 md:w-15 md:h-15 border-white border-[1px] flex justify-center items-center text-white rounded-full cursor-pointer"
           >
-            <img src="/assets/go_to_product.png" alt="" />
+            <i className="fa-solid fa-angle-right"></i>
           </div>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

@@ -46,7 +46,6 @@ function headerProducts({imageStyle}) {
     }
 
     document.addEventListener('keyup', (e)=>{
-      console.log(e.key);
       if(e.key=='ArrowDown'){
         const wheelEvent = new WheelEvent('wheel', {deltaY: 100});
         window.dispatchEvent(wheelEvent);
@@ -96,9 +95,6 @@ function headerProducts({imageStyle}) {
               </motion.h3>
         ))}
       </motion.div>
-      <div className="flex py-16 justify-center items-center absolute w-full bottom-10">
-          <Categories />
-      </div>
     </div>
   );
 }

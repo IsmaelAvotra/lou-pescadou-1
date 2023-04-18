@@ -30,3 +30,19 @@
 body{
   font-family: 'Dancing Script', cursive;
 }
+.custom-header{
+  padding-left: 300px;
+  padding-right: 300px;
+}
+@media (max-width:1600px) {
+  .custom-header{
+    padding-left: 200px;
+    padding-right: 200px;
+  }
+}
+@media (max-width:1300px) {
+  .custom-header{
+    padding-left: 100px;
+    padding-right: 100px;
+  }
+}

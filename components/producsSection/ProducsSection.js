@@ -7,7 +7,7 @@ import { fetchProductsData } from "@/App/Features/Products/produtsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-function mostSold({ title }) {
+function mostSold({ title, cardClasss, titleClasses }) {
   const products = useSelector((state) => state.products.productsData);
   const loading = useSelector((state) => state.products.loading);
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function mostSold({ title }) {
 
   return (
     <div className="w-full h-[40%] mt-5 flex items-start flex-col">
-      <h1 className="text-white font-bold md:text-5xl mb-10 text-3xl z-30 ml-8 sm:ml-40">
+      <h1 className={`w-full md:text-3xl mb-2 md:mb-10 text-2xl z-30 ${titleClasses} py-2 tracking-widest`}>
         {title}
       </h1>
 
@@ -50,7 +50,7 @@ function mostSold({ title }) {
           ? products.drinks.map((drink) => {
               return (
                 <SwiperSlide key={drink.idDrink}>
-                  <ProductCard title={drink.strDrink} id={drink.idDrink} photoUrl={drink.strDrinkThumb} description={drink.strInstructions} />
+                  <ProductCard title={drink.strDrink} id={drink.idDrink} photoUrl={drink.strDrinkThumb} description={drink.strInstructions} cardClasss={cardClasss} />
                 </SwiperSlide>
               );
             })

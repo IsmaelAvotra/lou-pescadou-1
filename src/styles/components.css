@@ -1,0 +1,10 @@
+.glass{
+    background: rgba( 255, 255, 255, 0.1 );
+    backdrop-filter: blur( 10px );
+    -webkit-backdrop-filter: blur( 10px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+}
+.stroke-link{
+    text-stroke: 0.2px #0b0960;
+    -webkit-text-stroke: 0.2px #0b0960;
+}
