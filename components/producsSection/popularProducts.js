@@ -4,7 +4,7 @@ import Categories from "../../components/categories/categories";
 
 const PopularProducts = () => {
     return (
-      <div className="lg:h-screen lg:px-10 py-10 lg:py-16 relative">
+      <div className="lg:h-screen lg:px-10 py-10 lg:py-16 relative z-10">
         <img src={`/assets/popular.png`} className='hidden lg:block w-full absolute -top-[30%] md:-top-[50%] left-0 -z-10'/>
         <img src={`/assets/popular-mobile.png`} className='lg:hidden w-full absolute -top-[30%] md:-top-[50%] left-0 -z-10'/>
         <div className='py-5 text-[#000c6e] w-full text-center'>
@@ -18,7 +18,7 @@ const PopularProducts = () => {
             reservez votre poisson en 24/48h! <a href='#' className='underline'>Comment ca marche?</a>
           </p>
         </div>
-        <MostSold title={"Les plus vendus cette semaine"} titleClasses="text-center text-[#0b0960]" cardClasss='bg-[#6281aca1] backdrop-blur-2xl shadow-md p-4' />
+        <MostSold title={"Les plus vendus cette semaine"} titleClasses="text-center text-[#0b0960]" cardClasss='bg-[#6281aca1] backdrop-blur-2xl shadow-md' />
       </div>
     )
 }

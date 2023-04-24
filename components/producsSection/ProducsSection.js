@@ -26,7 +26,7 @@ function mostSold({ title, cardClasss, titleClasses }) {
         pagination={{
           clickable: true,
         }}
-        className="w-5/6 h-full md:black flex md:justify-center md:items-center"
+        className="w-5/6 h-full pt-2 pb-5 md:black flex md:justify-center md:items-center"
         breakpoints={{
           400: {
             slidesPerView: "auto",

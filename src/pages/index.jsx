@@ -3,12 +3,14 @@ import MostSold from "../../components/producsSection/ProducsSection";
 import PopularProducts from "../../components/producsSection/popularProducts";
 import Mobile from "../../components/mobile/components/Home";
 import Canvas from "../../components/bublles/canvas";
+import Footer from "../../components/layout/footer";
 import { fetchProductsData } from "@/App/Features/Products/produtsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
+
 export default function Home() {
-  const [isPhone, setIsPhone] = useState(true)
+  const [isPhone, setIsPhone] = useState(true);
 
   useEffect(()=>{
     const pc=matchMedia('(min-width:991px)')
@@ -33,10 +35,11 @@ export default function Home() {
         src="/bubbles-css/index.html"
       />
 
-      <div className="w-full relative h-screen z-10">
+      <div className="w-full">
         <Header />
         <PopularProducts/>
         <MostSold title={"Le plus populaire"} titleClasses="text-white text-center md:text-left md:indent-20" cardClasss='glass'/>
+        <Footer/>
       </div>
     </>
     )}

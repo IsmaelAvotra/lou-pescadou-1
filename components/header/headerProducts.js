@@ -5,10 +5,10 @@ import Categories from "../../components/categories/categories";
 
 function headerProducts({imageStyle}) {
   const heroProducts=[
-    {id:1, name:'Archerfish', image:'fish.png', price:10, x:'50', y:'-400', angle:0},
-    {id:2, name:'Salmon', image:'fish-1.png', price:126, x:'50', y:'500', angle:180},
-    {id:3, name:'Tuna', image:'fish-2.png', price:31, x:'500', y:'50', angle:90},
-    {id:4, name:'Angelfish', image:'fish-3.png', price:31, x:'-400', y:'50', angle:270},
+    {id:1, name:'Plats Cuisinée', image:'fish.png', price:10, x:'50', y:'-400', angle:0},
+    {id:2, name:'Epicerie', image:'fish-1.png', price:126, x:'50', y:'500', angle:180},
+    {id:3, name:'Composition de fromage', image:'fish-2.png', price:31, x:'500', y:'50', angle:90},
+    {id:4, name:'Produits Frais', image:'fish-3.png', price:31, x:'-400', y:'50', angle:270},
   ];
   const [rotate, setRotate] = useState(0);
   const [scrollAnabled, setScrollAnabled] = useState(false);
