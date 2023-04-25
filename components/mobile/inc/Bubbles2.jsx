@@ -12,7 +12,7 @@ const Bubbles2 = () => {
     setCtx(ctx);
     var count = canvas.height;
     var bubbles = [];
-    var bubbleCount = 30;
+    var bubbleCount = 20;
     var bubbleSpeed = 1;
     var popLines = 6;
     var popDistance = 40;

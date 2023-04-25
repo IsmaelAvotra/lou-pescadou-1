@@ -17,7 +17,7 @@ function mostSold({ title, cardClasss, titleClasses }) {
   }, []);
 
   return (
-    <div className="w-full h-[40%] mt-5 flex items-start flex-col">
+    <div className="w-full h-[40%] mt-5  flex items-start flex-col">
       <h1 className={`w-full md:text-3xl mb-2 md:mb-10 text-2xl z-30 ${titleClasses} py-2 tracking-widest`}>
         {title}
       </h1>

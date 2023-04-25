@@ -166,7 +166,7 @@ function canvas() {
       } else {
         createBubbles(10);
       }
-    }, 5000);
+    }, 6000);
   }, []);
 
   return (
