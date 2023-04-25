@@ -22,7 +22,7 @@ function searchPanel() {
           exit={{ opacity: 0 }}
           key="searchPanel"
           onClick={() => handleClose()}
-          className="w-screen z-40 h-screen flex justify-center items-start fixed backdrop-blur-md bg-[#0000003b]"
+          className="w-screen z-40 h-screen flex justify-center items-start fixed backdrop-blur-md bg-[#0000003b] fixed top-0"
         >
           <motion.div
             onClick={(e) => e.stopPropagation()}

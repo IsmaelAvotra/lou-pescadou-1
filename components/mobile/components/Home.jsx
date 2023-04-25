@@ -23,7 +23,7 @@ const Home = () => {
     
     <div className="container pb-[100px]" style={{marginTop:"80px"}}>
       <div className="row">
-        <div className="">
+        <div>
           <LogoSection />
         </div>
         <div className="container">

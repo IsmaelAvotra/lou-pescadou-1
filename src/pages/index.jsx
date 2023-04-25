@@ -7,6 +7,7 @@ import Footer from "../../components/layout/footer";
 import { fetchProductsData } from "@/App/Features/Products/produtsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import LogoSection from './../../components/mobile/inc/LogoSection';
 import Locations from "../../components/locations/Locations";
 
 export default function Home() {
@@ -21,10 +22,10 @@ export default function Home() {
 
   return (
     <>
-    {isPhone?(
+    {/* {isPhone?(
       <Mobile/>
     ):(
-      <>
+      <> */}
       <img
         src="/assets/bg.png"
         className="md:absolute h-[102vh]  -top-5 w-screen sm:h-max fixed z-0"
@@ -37,14 +38,15 @@ export default function Home() {
 
       <div className="w-full overflow-hidden">
         <Header />
+        <LogoSection/>
         <Histoire/>
         <MostSold title={"Le plus populaire"} titleClasses="text-white text-center py-5" cardClass='glass'/>
         <MostSold title={""} titleClasses="" cardClass='glass'/>
         <Locations/>
         <Footer/>
       </div>
-    </>
-    )}
+    {/* </>
+    )} */}
     </>
   );
 }
