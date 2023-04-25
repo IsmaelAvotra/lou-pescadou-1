@@ -30,7 +30,7 @@ function basket() {
           initial={{ opacity: 0.5 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="w-full h-full bg-[#00000034] fixed top-0 z-50"
+          className="w-full h-full bg-[#1A77CD34] fixed top-0 z-50"
           onClick={() => handleClose()}
         >
           <motion.div
@@ -40,7 +40,7 @@ function basket() {
             exit={{ x: -500 }}
             key="basket"
             transition={{ ease: "easeOut", duration: 0.4 }}
-            className="w-full md:w-2/6 h-screen bg-[#0b254970] rounded-2xl backdrop-blur-3xl"
+            className="w-full md:w-2/6 h-screen bg-[#1A77CD66] rounded-2xl backdrop-blur-2xl"
           >
             <div className="flex justify-between p-5 items-center">
               <div className="flex justify-start gap-x-5">
@@ -50,7 +50,7 @@ function basket() {
               <img
                 src="/assets/cancel.png"
                 onClick={() => handleClose()}
-                className="w-8 md:w-11"
+                className="w-8 md:w-11 cursor-pointer"
                 alt=""
               />
             </div>
@@ -67,7 +67,7 @@ function basket() {
                       <div className="flex text-white relative items-start w-full flex-col gap-y-3 p-3 md:p-4">
                         <img
                           src="/assets/cancel.png"
-                          className="h-4 md:h-6 self-end absolute"
+                          className="h-4 md:h-6 self-end absolute  cursor-pointer"
                           alt=""
                           onClick={() => handleDelete(product.id)}
                         />
@@ -78,14 +78,18 @@ function basket() {
                           {product.description}
                         </p>
                         <div className="flex self-end justify-between w-full items-center">
-                          <div className="flex w-7 md:w-10 font-black  rounded-[10px] text-3xl h-7 md:h-10 text-black justify-center items-center bg-white">
-                            <p onClick={() => dispatch(subQuantity())}>-</p>
+                          <div className="flex w-7 md:w-10 font-black  rounded-[10px] text-3xl h-7 md:h-10 text-black justify-center items-center bg-white cursor-pointer">
+                            <p onClick={() => dispatch(subQuantity())}>
+                              <i className="fa-solid fa-minus fa-xs"></i>
+                            </p>
                           </div>
                           <div className="flex w-28 md:w-32 rounded-full text-xl md:h-10 h-7 text-white justify-center items-center bg-transparent border-white border-[1px]">
                             <p>{quantity}</p>
                           </div>
-                          <div className="flex w-7 md:w-10 font-black rounded-[10px] text-3xl h-7 md:h-10 text-black justify-center items-center bg-white">
-                            <p onClick={() => dispatch(addQuantity())}>+</p>
+                          <div className="flex w-7 md:w-10 font-black rounded-[10px] text-3xl h-7 md:h-10 text-black justify-center items-center bg-white cursor-pointer">
+                            <p onClick={() => dispatch(addQuantity())}>
+                              <i className="fa-solid fa-plus fa-xs"></i>
+                            </p>
                           </div>
                         </div>
                       </div>
@@ -106,12 +110,12 @@ function basket() {
                   </p>
                 </motion.div>
               )}
-              <div className="text-white w-[92%] flex justify-between items-center absolute bottom-28 font-bold text-3xl">
+              <div className="text-white w-[92%] flex justify-between items-center absolute bottom-28 font-bold text-3xl mb-3">
                 <p>total</p>
                 <p>{total}</p>
               </div>
 
-              <button className="w-[92%] absolute bottom-0 text-white bg-[#0B2549] rounded-[10px] py-3 mb-5">
+              <button className="w-[92%] absolute bottom-0 text-[#0B2549] bg-[#fff] text-2xl rounded-[10px] py-3 mb-5">
                 Checkout
               </button>
             </div>

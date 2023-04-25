@@ -20,7 +20,7 @@ function headerProducts({imageStyle}) {
     }else{
       setAnimatedFish(heroProducts[0]);
     }
-  }
+  };
 
   useEffect(() => {
     const intervalId = setInterval(changeAnimatedFish, 10000);
