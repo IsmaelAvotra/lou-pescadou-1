@@ -1,6 +1,8 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import Categories from "../categories/categories";
+import { btnAnimation, heroDescriptionAnimation, heroImageAnimation, heroTextAnimation } from "../motion-animations";
+
 
 
 function headerProducts({imageStyle}) {
@@ -35,37 +37,6 @@ function headerProducts({imageStyle}) {
       <motion.img animate={heroImageAnimation} src={`/assets/${animatedFish.image}`} alt="categorie image" />
     </div>
   );
-}
-
-//  Animation Constants
-const opacity=[0, 1, 1, 1, 1, 1, 1, 0.5];
-const textFramesX=[-1300, 10, 10, 10, 10, 10, 10, -1300];
-const transition= {repeat: Infinity, duration: 10};
-const heroImageAnimation={
-  x:[800, 100, 100, 100, 100, 100, 100, 800],
-  opacity,
-  transition,
-}
-const heroTextAnimation={
-  x:textFramesX,
-  opacity,
-  transition
-}
-const heroDescriptionAnimation={
-  x:textFramesX,
-  opacity,
-  transition:{
-    ...transition,
-    delay: 0.5,
-  },
-}
-const btnAnimation={
-  x:textFramesX,
-  opacity,
-  transition:{
-    ...transition,
-    delay: 0.6,
-  },
 }
 
 export default headerProducts;

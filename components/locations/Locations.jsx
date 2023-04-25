@@ -1,5 +1,7 @@
 import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
-import React from 'react';
+import { leftFadeIn, rightFadeIn } from "../motion-animations";
+import { motion, useInView } from "framer-motion";
+import React, { useRef } from "react";
 
 
 const center = {
@@ -7,7 +9,7 @@ const center = {
   lng: -38.523
 };
 
-function MyComponent() {
+function Map() {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyA_8CjHQ0JVtcFug0piLXCzcI6xaZvReso"
@@ -27,24 +29,39 @@ function MyComponent() {
     setMap(null)
   }, [])
 
+  const headerRef = useRef(null);
+  const containerRef = useRef(null);
+  const isHeaderInView = useInView(headerRef);
+  const isContainerInView = useInView(headerRef);
+
   return isLoaded ? (
     <>
-      <h1 className={`w-full md:text-5xl text-2xl relative z-30 text-center text-white pt-5`}>
-        Locations
-      </h1>
-      <GoogleMap
-        mapContainerClassName='h-[400px] text-white mt-5 w-[85%] m-auto rounded-[20px]'
-        center={center}
-        zoom={10}
-        onLoad={onLoad}
-        onUnmount={onUnmount}
-        id='locations'
+      <motion.h1 
+        className={`w-full md:text-5xl text-2xl relative z-30 text-center text-white pt-5`}
+        ref={headerRef}
+        animate={isHeaderInView ? leftFadeIn : {}}
       >
-        { /* Child components, such as markers, info windows, etc. */ }
-        <></>
-      </GoogleMap>
+        Locations
+      </motion.h1>
+
+      <motion.div
+        ref={containerRef}
+        animate={isContainerInView ? rightFadeIn : {}}
+      >
+        <GoogleMap
+          mapContainerClassName='h-[400px] text-white mt-5 w-[85%] m-auto rounded-[20px]'
+          center={center}
+          zoom={10}
+          onLoad={onLoad}
+          onUnmount={onUnmount}
+          id='locations'
+        >
+          
+          <></>
+        </GoogleMap>
+      </motion.div>
     </>
   ) : <></>
 }
 
-export default React.memo(MyComponent)
+export default React.memo(Map)

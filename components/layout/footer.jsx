@@ -1,8 +1,16 @@
-import React from "react";
+import { bottomFadeIn } from "../motion-animations";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const footer = () => {
+  const footerRef = useRef(null);
+  const isFooterInView = useInView(footerRef);
   return (
-    <div className="text-white glass font-sans mt-5 w-[85%] m-auto rounded-[20px]">
+    <motion.div 
+      className="text-white glass font-sans mt-5 w-[85%] m-auto rounded-[20px]"
+      ref={footerRef}
+      animate={isFooterInView ? bottomFadeIn : {}}
+    >
       <div className="container p-3 flex justify-evenly">
         <div className="flex flex-col">
           <h3 className='text-2xl mb-3 font-["Dancing_Script"]'>Infos</h3>
@@ -61,7 +69,7 @@ const footer = () => {
       <div className="container text-center p-3">
         © Copyright 2023 Lou Pescadeau. Tous les droits sont réservés.
       </div>
-    </div>
+    </motion.div>
   );
 };
 
