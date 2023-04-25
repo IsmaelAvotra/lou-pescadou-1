@@ -1,13 +1,13 @@
 import Header from "../../components/header/header";
 import MostSold from "../../components/producsSection/ProducsSection";
-import PopularProducts from "../../components/producsSection/popularProducts";
+import Histoire from "../../components/producsSection/popularProducts";
 import Mobile from "../../components/mobile/components/Home";
 import Canvas from "../../components/bublles/canvas";
 import Footer from "../../components/layout/footer";
 import { fetchProductsData } from "@/App/Features/Products/produtsSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-
+import Locations from "../../components/locations/Locations";
 
 export default function Home() {
   const [isPhone, setIsPhone] = useState(true);
@@ -35,10 +35,12 @@ export default function Home() {
         src="/bubbles-css/index.html"
       />
 
-      <div className="w-full">
+      <div className="w-full overflow-hidden">
         <Header />
-        <PopularProducts/>
-        <MostSold title={"Le plus populaire"} titleClasses="text-white text-center md:text-left md:indent-20" cardClasss='glass'/>
+        <Histoire/>
+        <MostSold title={"Le plus populaire"} titleClasses="text-white text-center py-5" cardClass='glass'/>
+        <MostSold title={""} titleClasses="" cardClass='glass'/>
+        <Locations/>
         <Footer/>
       </div>
     </>

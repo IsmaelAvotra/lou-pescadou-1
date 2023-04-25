@@ -28,7 +28,7 @@ function nevbar() {
         <Link href="/" className="drop-shadow-2xl text-2xl font-semibold flex justify-between items-center text-[#79c8f5]">
           Accueil
         </Link>
-        <Link href="/About" className="drop-shadow-2xl text-2xl font-semibold text-[#79c8f5]">
+        <Link href="/#histoire" className="drop-shadow-2xl text-2xl font-semibold text-[#79c8f5]">
           Notre histoire
         </Link>
         <a href="/#locations" className="drop-shadow-2xl text-2xl font-semibold text-[#79c8f5]">

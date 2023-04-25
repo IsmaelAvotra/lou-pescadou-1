@@ -2,7 +2,7 @@ import React from "react";
 
 const footer = () => {
   return (
-    <div className="text-white glass font-sans mt-5 w-[85%] m-auto rounded-[20px]" id='locations'>
+    <div className="text-white glass font-sans mt-5 w-[85%] m-auto rounded-[20px]">
       <div className="container p-3 flex justify-evenly">
         <div className="flex flex-col">
           <h3 className='text-2xl mb-3 font-["Dancing_Script"]'>Infos</h3>
