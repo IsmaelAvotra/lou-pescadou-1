@@ -28,12 +28,12 @@ function nevbar() {
         <Link href="/" className="drop-shadow-2xl text-2xl font-semibold flex justify-between items-center text-[#79c8f5]">
           Accueil
         </Link>
-        <Link href="/About" className="drop-shadow-2xl text-2xl font-semibold text-[#79c8f5]">
-          Pourquoi nous
+        <Link href="/#histoire" className="drop-shadow-2xl text-2xl font-semibold text-[#79c8f5]">
+          Notre histoire
         </Link>
-        <Link href="#" className="drop-shadow-2xl text-2xl font-semibold text-[#79c8f5]">
-          Caractéristiques
-        </Link>
+        <a href="/#locations" className="drop-shadow-2xl text-2xl font-semibold text-[#79c8f5]">
+          Locations
+        </a>
         <Link href="/" className="drop-shadow-2xl text-2xl font-semibold text-[#79c8f5]">
         <div className="w-40">
             <img src="/assets/logo-blue.png" className="w-full"/>

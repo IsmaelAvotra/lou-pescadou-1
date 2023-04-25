@@ -3,10 +3,10 @@ import "../styles/globals.css";
 import "../styles/slide.css";
 import "../styles/components.css";
 import { Providers } from "@/App/provider";
-import Nevbar from "../../components/nevbar";
+import Nevbar from "../../components/layout/nevbar";
 import Basket from "../../components/basket/basket";
-import Menu from "../../components/menu";
-import SearchPanel from "../../components/searchPanel";
+import Menu from "../../components/layout/menu";
+import SearchPanel from "../../components/layout/searchPanel";
 import ProductDetails from "../../components/productDetails/productDetails";
 
 export default function App({ Component, pageProps }) {

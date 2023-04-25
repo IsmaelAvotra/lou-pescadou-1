@@ -5,7 +5,7 @@ import { openProductDetails } from "@/App/Features/productDetails/productDetails
 import { AiOutlineClose } from "react-icons/ai";
 import { motion } from "framer-motion";
 
-function productCard({ title, id, photoUrl, description, cardClasss }) {
+function productCard({ title, id, photoUrl, description, cardClass }) {
   const dispatch = useDispatch();
   const router = useRouter();
   const products = useSelector((state) => state.basket.Products);
@@ -42,7 +42,7 @@ function productCard({ title, id, photoUrl, description, cardClasss }) {
 
   return (
     <motion.div 
-      className={`flex flex-col md:h-[95%] h-5/6 w-5/6 md:w-full justify-center items-center ${cardClasss} rounded-[20px] m-auto`}
+      className={`flex flex-col md:h-[95%] h-5/6 w-5/6 md:w-full justify-center items-center ${cardClass} rounded-[20px] m-auto p-4`}
       whileHover={{y:10}}
     >
       <div className="w-full h-[20%] md:h-[50%] flex flex-col justify-center items-center">

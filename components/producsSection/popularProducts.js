@@ -1,26 +1,41 @@
-import React from 'react';
-import MostSold from "./ProducsSection";
-import Categories from "../../components/categories/categories";
+import React, { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
+import { leftFadeIn, rightFadeIn } from '../motion-animations';
+
 
 const PopularProducts = () => {
-    return (
-      <div className="lg:h-screen lg:px-10 py-10 lg:py-16 relative">
-        <img src={`/assets/popular.png`} className='hidden lg:block w-full absolute -top-[30%] md:-top-[50%] left-0 -z-10'/>
-        <img src={`/assets/popular-mobile.png`} className='lg:hidden w-full absolute -top-[30%] md:-top-[50%] left-0 -z-10'/>
-        <div className='py-5 text-[#000c6e] w-full text-center relative mb-12'>
-          <div className="flex py-3 md:py-10 justify-center items-center w-full">
-            <Categories />
-          </div>
-          <h3 className='text-2xl w-[80%] md:text-5xl pb-5 md:pb-10 m-auto cat-title'>Votre poissonnerie en ligne de <span className='text-[#79c8f5]'>Crustaces</span></h3>
-          <p className='text-lg text-justify md:text-center md:text-2xl w-[60%] m-auto font-sans history '>
-            Passez commande en quelques clics!
-            votre poisson est achete la vielle ou le jour de l'envoi de votre colis.
-            reservez votre poisson en 24/48h! <a href='#' className='underline'>Comment ca marche?</a>
-          </p>
-        </div>
-        <MostSold title={"Les plus vendus cette semaine"} titleClasses="text-center text-[#0b0960]" cardClasss='bg-[#6281aca1] backdrop-blur-2xl shadow-md p-4' />
+  const paragraphRef = useRef(null);
+  const headerRef = useRef(null);
+  const isParagraphInView = useInView(paragraphRef);
+  const isHeaderInView = useInView(headerRef);
+
+  return (
+    <div className="lg:h-screen lg:px-10 py-10 relative z-10">
+      <img src={`/assets/popular.png`} className='hidden lg:block w-full absolute -top-[30%] md:-top-[10%] lg:-top-[30%] left-0 -z-10' id='histoire'/>
+      <img src={`/assets/popular-mobile.png`} className='lg:hidden w-full absolute -top-[30%] md:-top-[50%] left-0 -z-10'/>
+      <div className='py-4 text-[#000c6e] w-full text-center'>
+        <motion.h3 
+          className='text-2xl w-[80%] md:text-5xl m-auto my-5'
+          ref={headerRef}
+          animate={isHeaderInView ? leftFadeIn : {}}
+        >
+          Notre <span className='text-[#79c8f5]'>histoire</span>
+        </motion.h3>
+        <motion.p 
+          className='text-lg text-justify md:text-center  lg:text-3xl xl:text-4xl w-[60%] m-auto'
+          ref={paragraphRef}
+          animate={isParagraphInView ? rightFadeIn : {}}
+        >
+          Plongez dans notre sélection de poissons frais en ligne !
+          Lou Pescadou vous propose une sélection exceptionnelle de poissons frais et de fruits de mer de qualité supérieure, livrés directement chez vous. 
+          Notre processus de commande en ligne est simple et rapide. Vous pouvez facilement parcourir notre sélection de produits frais, 
+          ajouter des articles à votre panier, et passer votre commande en quelques clics seulement. 
+          Nous offrons également une livraison rapide et fiable pour assurer la fraîcheur de nos produits.
+          <a href='/histoire' className='underline text-[#79c8f5] text-2xl'>Voir Plus.</a>
+        </motion.p>
       </div>
-    )
+    </div>
+  )
 }
 
 export default PopularProducts
