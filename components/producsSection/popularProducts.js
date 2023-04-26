@@ -44,6 +44,14 @@ const PopularProducts = ({ isPhone }) => {
             Voir Plus.
           </a>
         </motion.p>
+        <div className="flex justify-center mt-12">
+          <div className="vid-button">
+            <i className="fa-solid fa-play text-white"></i>
+          </div>
+          <h2 className="text-black text-xl font-bold font-sans"><div className="vid-arrow"><img src={`/assets/pppointed.svg`}  /></div> 
+            <br /> Découvrez-nous <br /> en vidéo !
+          </h2>
+        </div>
       </div>
     </div>
   );

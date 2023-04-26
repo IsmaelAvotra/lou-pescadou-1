@@ -41,7 +41,7 @@ export default function Home() {
         <Header />
         <LogoSection/>
         <Histoire isPhone={isPhone}/>
-        <MostSold title={"Le plus populaire"} titleClasses="text-white text-center py-5" cardClass='glass' isPhone={isPhone}/>
+        <MostSold title={"Le plus populaire"} titleClasses="text-white text-center py-5 mt-[250px]" cardClass='glass' isPhone={isPhone}/>
         <MostSold title={""} titleClasses="" cardClass='glass' isPhone={isPhone}/>
         <Locations/>
         <Footer/>

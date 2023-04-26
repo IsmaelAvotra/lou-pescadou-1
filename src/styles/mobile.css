@@ -606,81 +606,6 @@ orders,
 .logo-container {
   display: none;
 }
-/* @media screen and (max-width: 430px) {
-  .logo-container {
-    display: block;
-  }
-  .cat{
-    position: absolute;
-    top: -360px;
-  }
-  .history{
-    position: absolute;
-    top: -20px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .cat-title{
-    position: absolute;
-    top: -100px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-  .warp__0 {
-    transform-origin: 50% 60px;
-    transform: translate(96px, 240px) rotate(0.31222rad);
-  }
-
-  .warp__1 {
-    transform-origin: 50% 60px;
-    transform: translate(130px, 265px) rotate(0.247339rad);
-  }
-
-  .warp__2 {
-    transform-origin: 50% 60px;
-    transform: translate(161.8313px, 283px) rotate(0.178712rad);
-  }
-
-  .warp__3 {
-    transform-origin: 50% 60px;
-    transform: translate(206.615px, 309.717px) rotate(0.12053rad);
-  }
-
-  .warp__4 {
-    transform-origin: 50% 60px;
-    transform: translate(240.1649px, 303px) rotate(0.06347rad);
-  }
-
-  .warp__5 {
-    transform-origin: 50% 60px;
-    transform: translate(285.9003px, 305px) rotate(0.000692rad);
-  }
-
-  .warp__6 {
-    transform-origin: 50% 60px;
-    transform: translate(327.5592px, 303px) rotate(-0.056603rad);
-  }
-
-  .warp__7 {
-    transform-origin: 50% 60px;
-    transform: translate(365.2324px, 293px) rotate(-0.104881rad);
-  }
-
-  .warp__8 {
-    transform-origin: 50% 60px;
-    transform: translate(394.2467px, 285px) rotate(-0.160415rad);
-  }
-
-  .warp__9 {
-    transform-origin: 50% 60px;
-    transform: translate(424px, 272px) rotate(-0.233032rad);
-  }
-
-  .warp__10 {
-    transform-origin: 50% 60px;
-    transform: translate(459px, 244px) rotate(-0.312689rad);
-  }
-} */
 
 @media screen and (max-width: 600px) {
   .logo-container {
@@ -778,4 +703,29 @@ orders,
   .head-pro {
     margin-top: 160px;
   }
+}
+.vid-button {
+  background-color: #2567c1;
+  border-radius: 50%;
+  display: flex;
+  padding: 0;
+  justify-content: center;
+  height: 0px;
+  align-items: center;
+  padding: 30px;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+.vid-arrow {
+  width: 50px;
+  height: 50px;
+}
+.vid-button:hover {
+  background-color: #2566c1b8;
+
+  box-shadow: 0 0 50px 1px rgba(0, 0, 0, 0.815);
+  -webkit-transition: all 0.2s ease-out;
+  -moz-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
 }
