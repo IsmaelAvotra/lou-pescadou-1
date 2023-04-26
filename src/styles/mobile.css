@@ -723,7 +723,6 @@ orders,
 }
 .vid-button:hover {
   background-color: #2566c1b8;
-
   box-shadow: 0 0 50px 1px rgba(0, 0, 0, 0.815);
   -webkit-transition: all 0.2s ease-out;
   -moz-transition: all 0.2s ease-out;
