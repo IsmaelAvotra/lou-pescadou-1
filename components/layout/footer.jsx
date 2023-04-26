@@ -11,7 +11,7 @@ const footer = () => {
       ref={footerRef}
       animate={isFooterInView ? bottomFadeIn : {}}
     >
-      <div className="container p-3 flex justify-evenly">
+      <div className="container p-3 lg:flex-row flex justify-evenly flex-col">
         <div className="flex flex-col">
           <h3 className='text-2xl mb-3 font-["Dancing_Script"]'>Infos</h3>
           <a href="#" className="mb-2 hover:text-white hover:tracking-wide duration-300">

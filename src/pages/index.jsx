@@ -28,9 +28,10 @@ export default function Home() {
       <> */}
       <img
         src="/assets/bg.png"
-        className="md:absolute h-[102vh]  -top-5 w-screen sm:h-max fixed z-0"
+        className="md:absolute h-[102vh]  -top-5 w-screen sm:h-[390%] fixed z-0"
         alt=""
       />
+      
       <iframe
         className="fixed h-screen w-screen"
         src="/bubbles-css/index.html"
@@ -39,9 +40,9 @@ export default function Home() {
       <div className="w-full overflow-hidden">
         <Header />
         <LogoSection/>
-        <Histoire/>
-        <MostSold title={"Le plus populaire"} titleClasses="text-white text-center py-5" cardClass='glass'/>
-        <MostSold title={""} titleClasses="" cardClass='glass'/>
+        <Histoire isPhone={isPhone}/>
+        <MostSold title={"Le plus populaire"} titleClasses="text-white text-center py-5" cardClass='glass' isPhone={isPhone}/>
+        <MostSold title={""} titleClasses="" cardClass='glass' isPhone={isPhone}/>
         <Locations/>
         <Footer/>
       </div>

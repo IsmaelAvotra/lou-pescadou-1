@@ -394,11 +394,11 @@ orders,
 }
 
 .logo-container {
-  position: relative;
+  position: absolute;
   display: flex;
   height: 100px;
   width: 100%;
-
+  top: -90px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -416,9 +416,9 @@ orders,
   backdrop-filter: blur(10px);
   width: 100vw;
   position: absolute;
-  top: -167px;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0%;
+
   display: flex;
   align-items: baseline;
   justify-content: center;
@@ -605,9 +605,6 @@ orders,
 
 .logo-container {
   display: none;
-  margin-bottom: 350px;
- 
-
 }
 /* @media screen and (max-width: 430px) {
   .logo-container {
@@ -685,24 +682,24 @@ orders,
   }
 } */
 
- @media screen and (max-width: 600px) {
+@media screen and (max-width: 600px) {
   .logo-container {
     display: block;
   }
   .logo-container {
     display: block;
   }
-  .cat{
+  .cat {
     position: absolute;
     top: -360px;
   }
-  .history{
+  .history {
     position: absolute;
     top: -20px;
     left: 50%;
     transform: translateX(-50%);
   }
-  .cat-title{
+  .cat-title {
     position: absolute;
     top: -100px;
     left: 50%;
@@ -778,5 +775,7 @@ orders,
     transform-origin: 50% 60px;
     transform: translate(459px, 277px) rotate(-0.312689rad);
   }
-} 
-
+  .head-pro {
+    margin-top: 160px;
+  }
+}

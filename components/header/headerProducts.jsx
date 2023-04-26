@@ -28,9 +28,9 @@ function headerProducts({imageStyle}) {
   }, [animatedFish]);
 
   return (
-    <div className="w-full h-full flex justify-center items-center relative container sm:flex-col-reverse lg:flex-row">
-      <div className="text-white">
-        <motion.h1 animate={heroTextAnimation} className="md:text-5xl xl:text-7xl mb-6 lg:text-6xl">{animatedFish.text}</motion.h1>
+    <div className="w-full h-full flex justify-center items-center relative container sm:flex-col-reverse lg:flex-row flex-col sm:mt-44 md:mt-1">
+      <div className="text-white head-pro">
+        <motion.h1 animate={heroTextAnimation} className="text-5xl xl:text-7xl mb-6 lg:text-6xl">{animatedFish.text}</motion.h1>
         <motion.p animate={heroDescriptionAnimation} className="text-4xl w-[80%] max-w-full mb-6">{animatedFish.desc}</motion.p>
         <motion.a animate={btnAnimation} className="custom-btn" href={`/categories/${animatedFish.id}`}>Découvrir</motion.a>
       </div>

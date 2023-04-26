@@ -10,7 +10,7 @@ import { leftFadeIn, rightFadeIn } from "../motion-animations";
 import { useInView, motion } from "framer-motion";
 
 
-function mostSold({ title, cardClass, titleClasses }) {
+function mostSold({ title, cardClass, titleClasses,isPhone }) {
   const products = useSelector((state) => state.products.productsData);
   const loading = useSelector((state) => state.products.loading);
   const dispatch = useDispatch();
@@ -29,7 +29,7 @@ function mostSold({ title, cardClass, titleClasses }) {
       <motion.h1 
         className={`w-full md:text-5xl text-2xl z-30 ${titleClasses} tracking-widest`}
         ref={headerRef}
-        animate={isHeaderInView ? leftFadeIn : {}}
+        animate={isHeaderInView && !isPhone  ? leftFadeIn : {}}
       >
         {title}
       </motion.h1>
@@ -65,7 +65,7 @@ function mostSold({ title, cardClass, titleClasses }) {
                   <SwiperSlide key={drink.idDrink}>
                     <motion.div
                       ref={containerRef}
-                      animate={isContainerInView ? rightFadeIn : {}}
+                      animate={isContainerInView && !isPhone  ? rightFadeIn : {}}
                     >
                       <ProductCard title={drink.strDrink} id={drink.idDrink} photoUrl={drink.strDrinkThumb} description={drink.strInstructions} cardClass={cardClass} />
                     </motion.div>
