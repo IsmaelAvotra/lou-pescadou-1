@@ -2,9 +2,6 @@
 
 import { createSlice } from "@reduxjs/toolkit";
 import { Screens } from "../../../enums/screensEnum";
-import { useDispatch } from "react-redux";
-import { openBasket } from "../Card/basketSlice";
-import { openSearchPanel } from "../searchPanel/searchPanelSlice";
 
 const initialState = {
   screen: "home",

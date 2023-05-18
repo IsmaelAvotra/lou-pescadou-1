@@ -3,6 +3,7 @@ import {
   addQuantity,
   subQuantity,
 } from "@/App/Features/productDetails/productDetailsSlice";
+import { addToBasket } from "@/App/Features/Card/basketSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { AiFillStar } from "react-icons/ai";
@@ -21,6 +22,20 @@ function productDetails() {
   const id = useSelector((state) => state.productDetails.id);
   const details = useSelector((state) => state.productDetails.details);
 
+  const handleAddToBasket = () => {
+    dispatch(
+      addToBasket({
+        title: details.strDrink,
+        description: details.strInstructions,
+        price: "30",
+        id: details.id,
+        photoUrl: details.strDrinkThumb,
+      })
+    );
+  }
+
+  
+
   const handleClose = () => {
     dispatch(openProductDetails({ toggled: false }));
   };
@@ -28,7 +43,6 @@ function productDetails() {
   useEffect(() => {
     if(opened) {
       dispatch(fetchProductsDetails(id));
-      console.log(details);
     }
   }, [opened]);
 
@@ -113,7 +127,7 @@ function productDetails() {
                 <p onClick={() => dispatch(addQuantity())}>+</p>
               </div>
             </div>
-            <button className="w-5/6 border-gray-300 text-white py-3 mt-5 rounded-[10px] border-[1px]">
+            <button onClick={() => handleAddToBasket()} className="w-5/6 border-gray-300 text-white py-3 mt-5 rounded-[10px] border-[1px]">
               Add to card
             </button>
           </div>

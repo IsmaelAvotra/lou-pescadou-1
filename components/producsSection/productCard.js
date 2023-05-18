@@ -16,7 +16,7 @@ function productCard({ title, id, photoUrl, description, cardClass }) {
 
   const handleBuy = (e) => {
     e.stopPropagation();
-    if (products.filter((product) => product.id === id).length > 0) {
+    if (products.filter((product) => product._id === id).length > 0) {
       return;
     }
 
@@ -46,11 +46,11 @@ function productCard({ title, id, photoUrl, description, cardClass }) {
       whileHover={{y:10}}
     >
       <div className="w-full h-[20%] md:h-[50%] flex flex-col justify-center items-center">
-        <div className="w-full h-full flex justify-center items-center">
-          <div className="w-3/6 text-white font-bold text-xl md:text-3xl flex justify-start px-5 items-start">
+        <div className="w-full h-full flex justify-between items-center">
+          <div className="text-white font-bold text-xl md:text-3xl flex justify-start items-start">
             <h1>30£</h1>
           </div>
-          <div className=" flex justify-end items-cente px-5">
+          <div className="flex justify-end items-cente">
             <div
               onClick={(e) => handleBuy(e)}
               className="w-10 h-10 md:w-15 md:h-15 flex border-white border-[1px] rounded-full justify-center items-center"
@@ -86,7 +86,7 @@ function productCard({ title, id, photoUrl, description, cardClass }) {
         <div className="w-full flex justify-center items-center">
           <img src="/assets/fish.png" className="w-5/6" alt="" />
         </div>
-        <div className="w-full px-5 flex justify-between items-center">
+        <div className="w-full flex justify-between items-center">
           <div className="w-4/6 py-2 md:py-3 font-bold text-xl border-white border-[1px] flex justify-center items-center text-white rounded-full ">
             <p>{title}</p>
           </div>

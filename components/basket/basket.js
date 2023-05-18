@@ -1,18 +1,21 @@
 import { useSelector, useDispatch } from "react-redux";
-import { openBasket, deleteFromBasket } from "@/App/Features/Card/basketSlice";
+import {
+  openBasket,
+  deleteFromBasket,
+  checkout,
+} from "@/App/Features/Card/basketSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import { switchScreen } from "@/App/Features/manu/menuSlice";
-import {
-  addQuantity,
-  subQuantity,
-} from "@/App/Features/productDetails/productDetailsSlice";
+import { addQuantity, subQuantity } from "@/App/Features/Card/basketSlice";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 function basket() {
+  const router = useRouter();
   const opened = useSelector((state) => state.basket.opened);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.basket.Products);
-  const total = useSelector((state) => state.basket.total);
-  const quantity = useSelector((state) => state.productDetails.quantity);
+  const {checkoutSuccess, total, checkoutUrl} = useSelector((state) => state.basket);
 
   const handleClose = () => {
     dispatch(openBasket({ toggled: false }));
@@ -23,6 +26,31 @@ function basket() {
     dispatch(deleteFromBasket({ id: id }));
   };
 
+  const handleCheckOut = () => {
+    if (!localStorage.getItem("user")) {
+      dispatch(switchScreen({ screen: "userProfile" }));
+      dispatch(openBasket({ toggled: false }));
+      return router.push("/Login");
+    }
+    const userData = JSON.parse(localStorage.getItem("user"));
+    dispatch(
+      checkout({
+        userId: userData.user._id,
+        data: {
+          products: products.map((product) => {
+            return {
+              _id: product.id,
+              quantity: product.quantity,
+              price: product.price,
+            };
+          }),
+          amount: total,
+          status: "Not processed",
+          userEmail: userData.user.email,
+        },
+      })
+    );
+  };
   return (
     <AnimatePresence>
       {opened && (
@@ -58,7 +86,10 @@ function basket() {
               {products.length > 0 ? (
                 products.map((product) => {
                   return (
-                    <div key={product.title} className="w-[92%] flex justify-start h-32 md:h-40 border-gray-400 rounded-xl border-[1px]">
+                    <div
+                      key={product.title}
+                      className="w-[92%] flex justify-start h-32 md:h-40 border-gray-400 rounded-xl border-[1px]"
+                    >
                       <img
                         className="h-full rounded-2xl"
                         src={product.photoUrl}
@@ -79,15 +110,23 @@ function basket() {
                         </p>
                         <div className="flex self-end justify-between w-full items-center">
                           <div className="flex w-7 md:w-10 font-black  rounded-[10px] text-3xl h-7 md:h-10 text-black justify-center items-center bg-white cursor-pointer">
-                            <p onClick={() => dispatch(subQuantity())}>
+                            <p
+                              onClick={() =>
+                                dispatch(subQuantity({ id: product.id }))
+                              }
+                            >
                               <i className="fa-solid fa-minus fa-xs"></i>
                             </p>
                           </div>
                           <div className="flex w-28 md:w-32 rounded-full text-xl md:h-10 h-7 text-white justify-center items-center bg-transparent border-white border-[1px]">
-                            <p>{quantity}</p>
+                            <p>{product.quantity}</p>
                           </div>
                           <div className="flex w-7 md:w-10 font-black rounded-[10px] text-3xl h-7 md:h-10 text-black justify-center items-center bg-white cursor-pointer">
-                            <p onClick={() => dispatch(addQuantity())}>
+                            <p
+                              onClick={() =>
+                                dispatch(addQuantity({ id: product.id }))
+                              }
+                            >
                               <i className="fa-solid fa-plus fa-xs"></i>
                             </p>
                           </div>
@@ -115,7 +154,10 @@ function basket() {
                 <p>{total}</p>
               </div>
 
-              <button className="w-[92%] absolute bottom-0 text-[#0B2549] bg-[#fff] text-2xl rounded-[10px] py-3 mb-5">
+              <button
+                onClick={() => handleCheckOut()}
+                className="w-[92%] absolute bottom-0 text-[#0B2549] bg-[#fff] text-2xl rounded-[10px] py-3 mb-5"
+              >
                 Checkout
               </button>
             </div>

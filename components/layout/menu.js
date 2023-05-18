@@ -7,20 +7,21 @@ import { Screens } from "@/enums/screensEnum";
 import { openBasket } from "@/App/Features/Card/basketSlice";
 import { FaUserAlt } from "react-icons/fa";
 import { openSearchPanel } from "@/App/Features/searchPanel/searchPanelSlice";
+import { useRouter } from "next/router";
 
 function menu() {
   const dispatch = useDispatch();
   let screenSelected = useSelector((state) => state.menu.screen);
+  const router = useRouter();
   const basketLenght = useSelector((state) => state.basket.Products.length);
 
   const handleScreenDwitch = (screen) => {
     dispatch(switchScreen({ screen: screen }));
-    console.log(screen);
     switch (screen) {
       case Screens.HOME:
         dispatch(openBasket({ toggled: false }));
         dispatch(openSearchPanel({ toggled: false }));
-        console.log(screen);
+        router.push("/");
         break;
       case Screens.SEARCH:
         dispatch(openSearchPanel({ toggled: true }));
@@ -30,6 +31,14 @@ function menu() {
         dispatch(openBasket({ toggled: true }));
         dispatch(openSearchPanel({ toggled: false }));
         break;
+      case Screens.USER_PROFILE:
+        dispatch(openBasket({ toggled: false }));
+        dispatch(openSearchPanel({ toggled: false }));
+        if(localStorage.getItem("user")){
+          return router.push("/userProfile");
+        }
+        router.push("/Login");
+        break;
       default:
         break;
     }
@@ -38,25 +47,28 @@ function menu() {
   return (
     <div className="w-[95%] rounded-[20px] bg-[#0b254925] flex justify-center items-center h-20 backdrop-blur-3xl">
       <div className="w-[80%] flex justify-between items-center h-full">
-        <img src="/assets/home.png"
+        <img
+          src="/assets/home.png"
           onClick={() => handleScreenDwitch("home")}
           size={35}
           className={
-            screenSelected == Screens.HOME ? "opacity-1" : "opacity-75"
+            screenSelected == Screens.HOME ? "opacity-1" : "opacity-50"
           }
         />
-        <img src="/assets/search.png"
+        <img
+          src="/assets/search.png"
           onClick={() => handleScreenDwitch("search")}
           size={35}
           className={
-            screenSelected == Screens.SEARCH ? "opacity-1" : "opacity-75"
+            screenSelected == Screens.SEARCH ? "opacity-1" : "opacity-50"
           }
         />
         <div className="relative" onClick={() => handleScreenDwitch("basket")}>
-          <img src="/assets/basket_menu.png"
+          <img
+            src="/assets/basket_menu.png"
             size={35}
             className={
-              screenSelected == Screens.BASKET ? "opacity-1" : "opacity-75"
+              screenSelected == Screens.BASKET ? "opacity-1" : "opacity-50"
             }
           />
           {basketLenght > 0 && (
@@ -65,22 +77,22 @@ function menu() {
             </div>
           )}
         </div>
-        <img src="/assets/recent.png"
+        <img
+          src="/assets/recent.png"
           onClick={() => handleScreenDwitch("search")}
           size={35}
           className={
-            screenSelected == Screens.SEARCH ? "opacity-1" : "opacity-75"
+            screenSelected == Screens.SEARCH ? "opacity-1" : "opacity-50"
           }
         />
-        <img src="/assets/profile.png"
+        <img
+          src="/assets/profile.png"
           onClick={() => handleScreenDwitch("userProfile")}
           size={35}
           className={
-            screenSelected == Screens.USER_PROFILE
-              ? "opacity-1" : "opacity-75"
+            screenSelected == Screens.USER_PROFILE ? "opacity-1" : "opacity-50"
           }
         />
-
       </div>
     </div>
   );

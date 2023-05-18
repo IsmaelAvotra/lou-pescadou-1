@@ -1,12 +1,17 @@
 // landind section animations 
 const opacity=[0, 1, 1, 1, 1, 1, 1, 0.5];
-const textFramesX=[-1300, 10, 10, 10, 10, 10, 10, -1300];
+const textFramesX=[0, 10, 10, 10, 10, 10, 10, -1300];
 const transition= {repeat: Infinity, duration: 10};
 export const heroImageAnimation={
-  x:[800, 100, 100, 100, 100, 100, 100, 800],
+  x:[800, 0, 0, 0, 0, 0, 0, 800],
   opacity,
   transition,
 }
+export const loadingAnimation={
+  opacity,
+  transition,
+}
+
 export const heroTextAnimation={
   x:textFramesX,
   opacity,

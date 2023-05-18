@@ -14,7 +14,7 @@ const fetchProductsData = createAsyncThunk(
   "products/fetchProductsData",
   async () => {
     const products = await axios.get(
-      "https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a",
+      "http://192.168.1.16:8000/api/products",
       {
         "content-type": "application/json",
       }
@@ -34,7 +34,7 @@ export const productsSlice = createSlice({
       state.loading = false;
       state.productsData = action.payload;
       state.error = "";
-    });
+    }); 
     builder.addCase(fetchProductsData.rejected, (state, action) => {
       state.loading = false;
       state.productsData = [];

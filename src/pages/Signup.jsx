@@ -1,7 +1,82 @@
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { checkout } from "@/App/Features/Card/basketSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { register } from "@/App/Features/auth/authSlice";
 import Bubbles2 from "../../components/mobile/inc/Bubbles2";
+import { useRouter } from "next/router";
+import { toast } from "react-toastify";
+import { showLoading } from "@/App/Features/loading/loadingSlice";
 
 const Signup = () => {
+  const Products = useSelector((state) => state.basket.Products);
+  const { checkoutSuccess, total, checkoutUrl } = useSelector(
+    (state) => state.basket
+  );
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const { loading, user, error, success } = useSelector(
+    (state) => state.auth.register
+  );
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+
+  const { name, email, password } = formData;
+
+  const onchange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = (e) => {
+    const reg = new RegExp(
+      "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$"
+    );
+    if (!password.match(reg)) {
+      return toast("password format is invalid");
+    }
+    e.preventDefault();
+    dispatch(register(formData));
+  };
+
+  useEffect(() => {
+    if (success) {
+      if (Products.length > 0) {
+        const userData = JSON.parse(localStorage.getItem("user"));
+        console.log(JSON.parse(localStorage.getItem("user")));
+        return dispatch(
+          checkout({
+            userId: userData.user._id,
+            data: {
+              products: Products.map((product) => {
+                return {
+                  _id: product.id,
+                  quantity: product.quantity,
+                  price: product.price,
+                };
+              }),
+              amount: total,
+              status: "Not processed",
+              userEmail: userData.user.email,
+            },
+          })
+        );
+      }
+      router.push("/");
+    }
+  }, [success]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(showLoading({ toggled: false }));
+    }, 2000);
+  }, []);
+
   return (
     <div className="container pt-[200px] font-mono capitalize">
       <div className="row d-flex justify-content-center">
@@ -13,29 +88,38 @@ const Signup = () => {
           </div>
           <div className="col">
             <div className="w-100">
-              <form action="" method="get" className="w-full m-auto">
+              <div className="w-full m-auto">
                 <div className="m-2">
                   <input
                     className="input"
-                    type="email"
-                    required
-                    placeholder="Name"
-                  />
-                </div>
-                <div className="m-2">
-                  <input
-                    className="input"
-                    type="email"
-                    required
-                    placeholder="Email"
-                  />
-                </div>
-                <div className="m-2">
-                  <input
-                    className="input"
+                    name="name"
+                    value={name}
                     type="text"
                     required
+                    placeholder="Name"
+                    onChange={(e) => onchange(e)}
+                  />
+                </div>
+                <div className="m-2">
+                  <input
+                    className="input"
+                    type="email"
+                    name="email"
+                    value={email}
+                    required
+                    placeholder="Email"
+                    onChange={(e) => onchange(e)}
+                  />
+                </div>
+                <div className="m-2">
+                  <input
+                    className="input"
+                    name="password"
+                    value={password}
+                    type="password"
+                    required
                     placeholder="Password"
+                    onChange={(e) => onchange(e)}
                   />
                 </div>
                 <div className="w-full p-3">
@@ -69,12 +153,15 @@ const Signup = () => {
                 <br />
                 <div className="row m-1">
                   <div className="col">
-                    <button className="btn btn-secondary w-100 text-base text-black">
-                      Signup
+                    <button
+                      onClick={(e) => onSubmit(e)}
+                      className="btn btn-secondary w-100 text-base text-black"
+                    >
+                      {loading ? "loading" : "Signup"}
                     </button>
                   </div>
                 </div>
-              </form>
+              </div>
             </div>
           </div>
         </div>

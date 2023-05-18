@@ -9,7 +9,7 @@ const initialState = {
   details: {},
   loading: false,
   id: "",
-  quantity: 0,
+  quantity: 1,
 };
 
 const fetchProductsDetails = createAsyncThunk(
@@ -30,15 +30,6 @@ export const productDetailsSlice = createSlice({
       state.opened = action.payload.toggled;
       state.id = action.payload.id;
     },
-    addQuantity: (state) => {
-      state.quantity = state.quantity + 1;
-    },
-    subQuantity: (state) => {
-      if (state.quantity == 0) {
-        return;
-      }
-      state.quantity = state.quantity - 1;
-    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchProductsDetails.pending, (state) => {
@@ -48,7 +39,6 @@ export const productDetailsSlice = createSlice({
       state.loading = false;
       state.details = action.payload;
       state.error = "";
-      console.log(action.payload);
     });
     builder.addCase(fetchProductsDetails.rejected, (state, action) => {
       state.loading = false;
@@ -58,7 +48,7 @@ export const productDetailsSlice = createSlice({
   },
 });
 
-export const { openProductDetails, addQuantity, subQuantity } =
+export const { openProductDetails } =
   productDetailsSlice.actions;
 
 export { fetchProductsDetails };

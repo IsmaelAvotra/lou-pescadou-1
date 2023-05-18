@@ -1,7 +1,80 @@
 import Link from "next/link";
+import { use, useCallback, useEffect } from "react";
+import { checkout } from "@/App/Features/Card/basketSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { useState } from "react";
+import { login } from "@/App/Features/auth/authSlice";
 import Bubbles2 from "../../components/mobile/inc/Bubbles2";
+import { useRouter } from "next/router";
+import { switchScreen } from "@/App/Features/manu/menuSlice";
+import { showLoading } from "@/App/Features/loading/loadingSlice";
 
 const Login = () => {
+  const dispatch = useDispatch();
+  const { checkoutSuccess, checkoutUrl, total } = useSelector(
+    (state) => state.basket
+  );
+  const router = useRouter();
+  const { Products } = useSelector((state) => state.basket);
+  const { loading, user, error, success } = useSelector(
+    (state) => state.auth.login
+  );
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+  });
+
+  const { email, password } = formData;
+
+  const onchange = (e) => {
+    setFormData((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    dispatch(login(formData));
+  };
+
+  useEffect(() => {
+    if (success) {
+      if (Products.length > 0) {
+        const userData = JSON.parse(localStorage.getItem("user"));
+        return dispatch(
+          checkout({
+            userId: userData.user._id,
+            data: {
+              products: Products.map((product) => {
+                return {
+                  _id: product.id,
+                  quantity: product.quantity,
+                  price: product.price,
+                };
+              }),
+              amount: total,
+              status: "Not processed",
+              userEmail: userData.user.email
+            },
+          })
+        );
+      }
+      router.push("/");
+      dispatch(switchScreen({ screen: "home" }));
+    }
+  }, [success]);
+
+  useEffect(() => {
+    if (loading) showLoading({ toggled: true });
+  }, [loading]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(showLoading({ toggled: false }));
+    }, 2000);
+  }, []);
+
   return (
     <div className="container pt-[200px] font-mono capitalize">
       <div className="row d-flex justify-content-center m-0">
@@ -19,14 +92,22 @@ const Login = () => {
                     <input
                       type="email"
                       className="input"
-                      placeholder="Enter email"
+                      name="email"
+                      value={email}
+                      required
+                      placeholder="Email"
+                      onChange={(e) => onchange(e)}
                     />
                   </div>
                   <div className=" m-3">
                     <input
-                      type="password"
                       className="input"
+                      name="password"
                       placeholder="Password"
+                      value={password}
+                      type="password"
+                      required
+                      onChange={(e) => onchange(e)}
                     />
                   </div>
 
@@ -44,7 +125,10 @@ const Login = () => {
 
                   <div className="row m-1">
                     <div className="col">
-                      <button className="btn btn-secondary w-100  text-base text-black">
+                      <button
+                        onClick={(e) => onSubmit(e)}
+                        className="btn btn-secondary w-100  text-base text-black"
+                      >
                         Se connecter
                       </button>
                     </div>
@@ -55,7 +139,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-      <Bubbles2/>
+      <Bubbles2 />
       <div className="bg-pes"></div>
     </div>
   );
