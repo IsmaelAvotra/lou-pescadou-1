@@ -17,7 +17,7 @@ const checkout = createAsyncThunk(
   async ({ userId, data }) => {
     const token = `Bearer ${JSON.parse(localStorage.getItem("user")).token}`;
     const response = await axios.post(
-      `http://192.168.1.16:8000/api/order/create/${userId}`,
+      `http://172.18.128.1:8000/api/order/create/${userId}`,
       {
         "content-type": "application/json",
         data: data,

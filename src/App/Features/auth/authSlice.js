@@ -23,20 +23,19 @@ const initialState = {
 const register = createAsyncThunk("auth/register", async (user) => {
   if (!user.name || !user.email || !user.password)
     return toast("please provide the needed data");
-  const response = await axios.post(
-    "http://192.168.1.16:8000/api/signup",
-    {
+  const response = await axios
+    .post("http://172.18.128.1:8000/api/signup", {
       "content-type": "application/json",
       data: user,
-    }
-  ).catch(error => console.log(error));
+    })
+    .catch((error) => console.log(error));
   return response.data;
 });
 
 const login = createAsyncThunk("auth/login", async (user) => {
   if (!user.email || !user.password)
     return toast("please provide the needed data");
-  const response = await axios.post("http://192.168.1.16:8000/api/signin", {
+  const response = await axios.post("http://172.18.128.1:8000/api/signin", {
     "content-type": "application/json",
     data: user,
   });

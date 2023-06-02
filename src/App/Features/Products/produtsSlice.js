@@ -13,12 +13,9 @@ const initialState = {
 const fetchProductsData = createAsyncThunk(
   "products/fetchProductsData",
   async () => {
-    const products = await axios.get(
-      "http://192.168.1.16:8000/api/products",
-      {
-        "content-type": "application/json",
-      }
-    );
+    const products = await axios.get("http://172.18.128.1:8000/api/products", {
+      "content-type": "application/json",
+    });
     return products.data;
   }
 );
@@ -34,7 +31,7 @@ export const productsSlice = createSlice({
       state.loading = false;
       state.productsData = action.payload;
       state.error = "";
-    }); 
+    });
     builder.addCase(fetchProductsData.rejected, (state, action) => {
       state.loading = false;
       state.productsData = [];

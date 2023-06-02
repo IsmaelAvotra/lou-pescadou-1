@@ -12,16 +12,16 @@ const PopularProducts = ({ isPhone }) => {
     <div className="lg:h-screen lg:px-10 mt-32 py-10 relative z-10">
       <img
         src={`/assets/popular.png`}
-        className="hidden lg:block w-full absolute -top-[30%] md:-top-[10%] lg:-top-[30%] left-0 -z-10"
+        className="hidden lg:block w-full absolute -top-[30%] md:-top-[10%] lg:-top-[16%] left-0 -z-10"
         id="histoire"
       />
       <img
         src={`/assets/popular-mobile.png`}
         className="lg:hidden w-full absolute -top-[10%] md:-top-[50%] left-0 -z-10"
       />
-      <div className="py-4 text-[#000c6e] w-full text-center">
+      <div className="py-5 text-[#000c6e] w-full text-center">
         <motion.h3
-          className="text-2xl w-[80%] md:text-5xl m-auto lg:my-5 my-0"
+          className="text-2xl w-[80%] md:text-5xl m-auto lg:my-6 my-0 py-4"
           ref={headerRef}
           animate={isHeaderInView && !isPhone ? leftFadeIn : {}}
         >
@@ -45,7 +45,7 @@ const PopularProducts = ({ isPhone }) => {
           </a>
         </motion.p>
         <div className="flex justify-center w-full h-96 bg-[#000] md:mt-44 mt-20">
-          <video src="" ></video>
+          <video src=""></video>
         </div>
       </div>
     </div>
